@@ -6,13 +6,16 @@ __author__ = "zhaojm"
 
 
 
-class TokenIdent(object):
+EOF = "EOF"
 
-    ADD = 1
-    SUB = 2
-    MUL = 3
-    DIV = 4
+IDENT = "IDENT"
+NUMBER = "NUMBER"
 
+
+ADD = "ADD"
+SUB = "SUB"
+MUL = "MUL"
+DIV = "DIV"
 
 
 
