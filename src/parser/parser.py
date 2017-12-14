@@ -18,10 +18,10 @@ class Parser(object):
 
             s = Scanner(f.read())
 
-            # i = 4
+            i = 10
             while True:
-                # i -= 1
+                i -= 1
                 pos, tok, lit = s.scan()
-                print pos, tok, lit
-                if tok == token.EOF:
+                print('--------------------', pos, tok, lit)
+                if tok == token.EOF or i < 0:
                     break

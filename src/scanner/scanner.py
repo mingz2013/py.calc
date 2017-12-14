@@ -30,7 +30,7 @@ class Scanner(object):
         print("=========")
 
     def next_ch(self):
-        # print("next_ch", self.offset)
+        print("next_ch", self.offset, self.ch)
         self.offset += 1
 
         if self.offset < len(self.src):
@@ -44,7 +44,7 @@ class Scanner(object):
         跳过空白部分
         :return:
         """
-        self.next_ch()
+        # self.next_ch()
         while self.ch in (' ', '\t', '\n', '\r'):
             self.next_ch()
 
@@ -58,6 +58,7 @@ class Scanner(object):
         self.next_ch()
         while is_letter(self.ch) or is_digit(self.ch):
             self.next_ch()
+        self.next_ch()
         return self.src[offs:self.offset]
 
     def scan_number(self):
@@ -65,7 +66,7 @@ class Scanner(object):
         self.next_ch()
         while is_digit(self.ch):
             self.next_ch()
-
+        self.next_ch()
         return self.src[offs: self.offset]
 
     def scan(self):
@@ -81,6 +82,7 @@ class Scanner(object):
             lit = self.scan_number()
         else:
             lit = ch
+            self.next_ch()
             if ch == -1:
                 tok = token.EOF
             elif ch == '+':
