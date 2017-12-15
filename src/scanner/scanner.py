@@ -55,18 +55,18 @@ class Scanner(object):
         """
         offs = self.offset
 
-        self.next_ch()
+        # self.next_ch()
         while is_letter(self.ch) or is_digit(self.ch):
             self.next_ch()
-        self.next_ch()
+        # self.next_ch()
         return self.src[offs:self.offset]
 
     def scan_number(self):
         offs = self.offset
-        self.next_ch()
+        # self.next_ch()
         while is_digit(self.ch):
             self.next_ch()
-        self.next_ch()
+        # self.next_ch()
         return self.src[offs: self.offset]
 
     def scan(self):
@@ -82,16 +82,20 @@ class Scanner(object):
             lit = self.scan_number()
         else:
             lit = ch
-            self.next_ch()
+
             if ch == -1:
                 tok = token.EOF
             elif ch == '+':
+                self.next_ch()
                 tok = token.ADD
             elif ch == '-':
+                self.next_ch()
                 tok = token.SUB
             elif ch == '*':
+                self.next_ch()
                 tok = token.MUL
             elif ch == '/':
+                self.next_ch()
                 tok = token.DIV
             else:
                 raise Exception("Unknown char", ch)

@@ -18,7 +18,7 @@ class Parser(object):
 
             s = Scanner(f.read())
 
-            i = 10
+            i = 100
             while True:
                 i -= 1
                 pos, tok, lit = s.scan()
