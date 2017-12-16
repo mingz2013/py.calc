@@ -1,5 +1,8 @@
 # -*- coding:utf-8 -*-
 """
+
+语法分析
+
 """
 __date__ = "14/12/2017"
 __author__ = "zhaojm"
@@ -8,6 +11,7 @@ import codecs
 
 from scanner.scanner import Scanner
 from token import token
+
 
 class Parser(object):
     def __init__(self):
