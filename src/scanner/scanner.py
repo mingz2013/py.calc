@@ -19,8 +19,8 @@ def is_digit(ch):
 
 
 class Scanner(object):
-    def __init__(self, src):
-        self.tokens = []
+    def __init__(self, file, src):
+        self.file = file
         self.src = src
 
         self.ch = ' '
@@ -28,6 +28,9 @@ class Scanner(object):
 
         print(self.src)
         print("=========")
+
+        self.next_ch()
+
 
     def next_ch(self):
         print("next_ch", self.offset, self.ch)

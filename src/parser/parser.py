@@ -7,25 +7,24 @@
 __date__ = "14/12/2017"
 __author__ = "zhaojm"
 
-import codecs
-
 from scanner.scanner import Scanner
 from token import token
 
 
 class Parser(object):
-    def __init__(self):
-        pass
+    def __init__(self, filename, src):
+        self.file = token.File(filename)
 
-    def parse(self, filename):
-        with codecs.open(filename, encoding='utf-8') as f:
+        self.scanner = Scanner(self.file, src)
 
-            s = Scanner(f.read())
+        self.pos = None
+        self.tok = None
+        self.lit = None
 
-            i = 100
-            while True:
-                i -= 1
-                pos, tok, lit = s.scan()
-                print('--------------------', pos, tok, lit)
-                if tok == token.EOF or i < 0:
-                    break
+        self.next_token()
+
+    def next_token(self):
+        self.pos, self.tok, self.lit = self.scanner.scan()
+        print('--------------------', self.pos, self.tok, self.lit)
+        if self.tok == token.EOF:
+            pass

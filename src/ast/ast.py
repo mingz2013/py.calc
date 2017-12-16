@@ -27,3 +27,4 @@ class Declaration(Node):
 class Ident(object):
     """标识符"""
 
+
