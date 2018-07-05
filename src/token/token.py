@@ -51,6 +51,7 @@ RBRACE = "RBRACE"  # }
 
 
 class Token(object):
+
     pass
 
 

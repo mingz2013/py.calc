@@ -1,7 +1,10 @@
 # -*- coding:utf-8 -*-
 """
 
-词法分析
+词法分析,生成token序列
+
+
+逐个字符walk，拆出来是 标识符，还是 数字，生成token
 
 """
 __date__ = "14/12/2017"
@@ -73,17 +76,17 @@ class Scanner(object):
         return self.src[offs: self.offset]
 
     def scan(self):
-        self.skip_white_space()
+        self.skip_white_space() # 跳过空白字符
         pos = self.offset
         ch = self.ch
 
-        if is_letter(ch):
+        if is_letter(ch): # 如果是字母
             tok = token.IDENT
             lit = self.scan_identifier()
-        elif is_digit(ch):
+        elif is_digit(ch): # 如果是数字
             tok = token.NUMBER
             lit = self.scan_number()
-        else:
+        else: # 不是字母也不是数字
             lit = ch
             self.next_ch()
             if ch == -1:

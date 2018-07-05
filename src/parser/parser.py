@@ -1,7 +1,9 @@
 # -*- coding:utf-8 -*-
 """
 
-语法分析
+语法分析，生成抽象语法树
+
+
 
 """
 __date__ = "14/12/2017"
@@ -28,3 +30,11 @@ class Parser(object):
         print('--------------------', self.pos, self.tok, self.lit)
         if self.tok == token.EOF:
             pass
+        else:
+
+            # self.next_token()
+            pass
+
+
+    def parse_file(self):
+        pass
