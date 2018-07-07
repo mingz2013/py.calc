@@ -53,12 +53,11 @@ DIV = "DIV"  # /
 
 
 class Token(object):
-
     pass
-
 
 
 class File(object):
     """文件"""
+
     def __init__(self, filename):
         self.filename = filename
