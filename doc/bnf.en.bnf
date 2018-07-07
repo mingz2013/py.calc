@@ -21,9 +21,6 @@
 
 // 一元表达式
 <unary_expression> ::= <primary_expression>
-                        | <tk_plus><unary_expression>
-                        |  <tk_minus><unary_expression>
-                        | <tk_star><unary_expression>
 
 // 乘除类表达式
 <multiplicative_expression> ::= <unary_expression>{
