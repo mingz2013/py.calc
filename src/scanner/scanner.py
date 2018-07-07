@@ -34,9 +34,8 @@ class Scanner(object):
 
         self.next_ch()
 
-
     def next_ch(self):
-        print("next_ch", self.offset, self.ch)
+        # print("next_ch", self.offset, self.ch)
         self.offset += 1
 
         if self.offset < len(self.src):
@@ -76,17 +75,17 @@ class Scanner(object):
         return self.src[offs: self.offset]
 
     def scan(self):
-        self.skip_white_space() # 跳过空白字符
+        self.skip_white_space()  # 跳过空白字符
         pos = self.offset
         ch = self.ch
 
-        if is_letter(ch): # 如果是字母
+        if is_letter(ch):  # 如果是字母
             tok = token.IDENT
             lit = self.scan_identifier()
-        elif is_digit(ch): # 如果是数字
+        elif is_digit(ch):  # 如果是数字
             tok = token.NUMBER
             lit = self.scan_number()
-        else: # 不是字母也不是数字
+        else:  # 不是字母也不是数字
             lit = ch
             self.next_ch()
             if ch == -1:
@@ -103,3 +102,7 @@ class Scanner(object):
                 raise Exception("Unknown char", ch)
 
         return pos, tok, lit
+
+
+if __name__ == "__main__":
+    pass

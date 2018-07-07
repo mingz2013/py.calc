@@ -1,0 +1,41 @@
+
+// 词法定义
+
+
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" // 数字
+
+<integer> ::= <digit>{<digit>} // 整数
+
+<tk_plus> ::= "+"
+<tk_minus> ::= "-"
+<tk_star> ::= "*"
+<tk_divide> ::= "/"
+<tk_assign> ::= "="
+
+
+// 语法定义
+
+
+// 初值表达式
+<primary_expression> ::= <integer> | (<expression>)
+
+// 一元表达式
+<unary_expression> ::= <primary_expression>
+                        | <tk_plus><unary_expression>
+                        |  <tk_minus><unary_expression>
+                        | <tk_star><unary_expression>
+
+// 乘除类表达式
+<multiplicative_expression> ::= <unary_expression>{
+                            <tk_star><unary_expression>
+                            | <tk_divide><unary_expression>
+                            }
+
+// 加减类表达式
+<relational_expression> ::= <multiplicative_expression> {
+                                <tk_plus><multiplicative_expression>
+                                | <tk_minus><multiplicative_expression>
+                                }
+
+// 表达式
+<expression> ::= <relational_expression>
