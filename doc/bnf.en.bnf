@@ -17,7 +17,7 @@
 
 
 // 初值表达式
-<primary_expression> ::= <integer> | (<expression>)
+<primary_expression> ::= <integer>
 
 // 一元表达式
 <unary_expression> ::= <primary_expression>

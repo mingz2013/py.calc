@@ -30,12 +30,12 @@ class Parser(object):
         print("next_token...")
         self.pos, self.tok, self.lit = self.scanner.scan()
         print('--------------------', self.pos, self.tok, self.lit)
-        if self.tok == token.EOF:
-            pass
-        else:
-
-            # self.next_token()
-            pass
+        # if self.tok == token.EOF:
+        #     pass
+        # else:
+        #
+        #     # self.next_token()
+        #     pass
 
     def parse_file(self):
         self.expression()
