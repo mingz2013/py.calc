@@ -15,7 +15,8 @@ from parser.parser import Parser
 
 def calc(filename):
     with codecs.open(filename, encoding='utf-8') as f:
-        print(Parser(filename, f.read()).parse_file())
+        ast = Parser(filename, f.read()).parse_file()
+        print(ast.execute())
 
 
 if __name__ == "__main__":
