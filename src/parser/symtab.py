@@ -57,6 +57,7 @@ class SymTab(object):
 
     def addVar(self, name, initData):
         """保存变量对象"""
+        print("addVar...", name, initData)
 
         var = Var(name, self.scopePath[:], initData)
 
@@ -84,7 +85,7 @@ class SymTab(object):
 
     def getVar(self, name):
         """获取变量对象"""
-
+        print("getVar...", name)
         # 匹配name，匹配最长当前路径scopePath
 
         select = None
@@ -95,14 +96,14 @@ class SymTab(object):
             max_len = 0
             for v in vlist:
                 l = len(v.scopePath)
-                print("getvar...", v.scopePath, self.scopePath)
+                # print("getvar...", v.scopePath, self.scopePath)
                 if l <= path_len and v.scopePath[l - 1] == self.scopePath[l - 1]:
                     if l > max_len:
                         max_len = l
                         select = v
 
         if not select:
-            print("error...select...")
+            print("error...select...", name)
             exit(1)
 
         return select
