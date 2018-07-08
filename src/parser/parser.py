@@ -38,6 +38,10 @@ class Parser(object):
         #     # self.next_token()
         #     pass
 
+    def error(self, *args):
+        print("error....", self.pos, self.tok, self.lit, args)
+        exit(1)
+
     def parse_file(self):
         node = self.expression()
 
@@ -46,17 +50,41 @@ class Parser(object):
 
         return node
 
-    def error(self, *args):
-        print("error....", self.pos, self.tok, self.lit, args)
-        exit(1)
+    def statement(self):
+        """语句"""
+        node = self.expression()
+        return node
 
     def expression(self):
         """表达式"""
         print("expression....")
-        node = self.relational_expression()
+        node = self.assignment_expression()
 
         print("expression...>", node)
         return node
+
+    def assignment_expression(self):
+        """赋值表达式"""
+        if self.tok == token.IDENT:
+
+            node = ast.Ident(self.lit)
+
+            self.next_token()
+
+            if self.tok == token.ASSIGN:
+
+                self.next_token()
+
+                node2 = self.relational_expression()
+
+                return ast.Assign(node, node2)
+
+            else:
+                self.error("assignment error..")
+
+        else:
+            self.error("assignment error")
+
 
     def relational_expression(self):
         """加减类表达式"""

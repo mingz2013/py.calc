@@ -1,7 +1,5 @@
 
 // 词法定义
-
-
 <digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" // 数字
 
 <integer> ::= <digit>{<digit>} // 整数
@@ -10,14 +8,39 @@
 <tk_minus> ::= "-"
 <tk_star> ::= "*"
 <tk_divide> ::= "/"
-<tk_assign> ::= "="
 <tk_lparen> ::= "("
 <tk_rparen> ::= ")"
 
 
+<lowercase_letter> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g"
+        | "h" | "i" | "j" | "k" | "l" | "m" | "n"
+        | "o" | "p" | "q" | "r" | "s" | "t"
+        | "u" | "v" | "w"
+        | "x" | "y" | "z"
+
+<uppercase_letter> ::= "A" | "B" | "C" | "D" | "E" | "F" | "G"
+        | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+        | "O" | "P" | "Q" | "R" | "S" | "T"
+        | "U" | "V" | "W"
+        | "X" | "Y" | "Z"
+
+<letter> ::= <lowercase_letter> | <uppercase_letter>
+
+
+<tk_underline> ::= "_"
+
+<non_numeric> ::= <letter> | <tk_underline>
+
+
+<ident> ::= <non_numeric>{<non_numeric>|<digit>}
+
+<tk_assign> ::= "="
 
 // 语法定义
 
+
+
+// 表达式
 
 // 初值表达式
 <primary_expression> ::= <integer>
@@ -28,15 +51,29 @@
 
 // 乘除类表达式
 <multiplicative_expression> ::= <unary_expression>{
-                            <tk_star><unary_expression>
-                            | <tk_divide><unary_expression>
-                            }
+                                                <tk_star><unary_expression>
+                                                | <tk_divide><unary_expression>
+                                                }
 
 // 加减类表达式
 <relational_expression> ::= <multiplicative_expression> {
-                                <tk_plus><multiplicative_expression>
-                                | <tk_minus><multiplicative_expression>
-                                }
+                                                    <tk_plus><multiplicative_expression>
+                                                    | <tk_minus><multiplicative_expression>
+                                                    }
+
+// 赋值表达式
+<assignment_expression> ::= <ident><tk_assign><relational_expression>
+
+
 
 // 表达式
-<expression> ::= <relational_expression>
+<expression> ::= <assignment_expression>
+
+
+
+// 语句
+
+// 赋值语句
+<statement> ::= {
+        <expression>
+    }

@@ -102,6 +102,8 @@ class Scanner(object):
                 tok = token.LPAREN
             elif ch == ')':
                 tok = token.RPAREN
+            elif ch == '=':
+                tok = token.ASSIGN
             else:
                 raise Exception("Unknown char", ch)
 

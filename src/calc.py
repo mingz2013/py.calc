@@ -20,4 +20,4 @@ def calc(filename):
 
 
 if __name__ == "__main__":
-    calc("test/0.2.calc")
+    calc("test/0.3.calc")

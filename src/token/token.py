@@ -36,7 +36,7 @@ DIV = "DIV"  # /
 # EQL = "EQL"  # ==
 # LSS = "LSS"  # <
 # GTR = "GTR"  # >
-# ASSIGN = "ASSIGN"  # =
+ASSIGN = "ASSIGN"  # =
 # NOT = "NOT"  # !
 #
 # NEQ = "NEQ"  # !=

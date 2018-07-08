@@ -101,3 +101,15 @@ class Div(BinaryOperator):
     def execute(self):
         """exe"""
         return self.left.execute() / self.right.execute()
+
+
+class Assign(BinaryOperator):
+    """赋值="""
+
+    def execute(self):
+        return Node
+
+
+class Ident(Node):
+    def __init__(self, lit):
+        self.value = lit
