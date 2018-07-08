@@ -13,6 +13,7 @@ class Node(object):
 
     def execute(self):
         """exe"""
+        return None
 
 
 class Expression(Node):
@@ -41,6 +42,11 @@ class File(Node):
 
     def append_statements(self, statement):
         self.statements.append(statement)
+
+    def execute(self):
+        for statement in self.statements:
+            statement.execute()
+        return None
 
 
 class EndNode(Node):
@@ -76,9 +82,23 @@ class Number(EndNode):
         return int(self.lit)
 
 
-class Ident(EndNode):
-    pass
+class Ident(Node):
+    """标识符"""
 
+    def __init__(self, pos, tok, lit):
+        self.pos = pos
+        self.tok = tok
+        self.lit = lit
+
+    #     self.expression = None
+    #
+    # def set_assign(self, node):
+    #     """定义，赋值"""
+    #     self.expression = node
+
+    def execute(self):
+        # return self.expression.execute()
+        return None
 
 
 class BinaryOperator(Node):
@@ -140,4 +160,56 @@ class Assign(BinaryOperator):
     """赋值="""
 
     def execute(self):
-        return Node
+        return None
+
+
+class Print(Node):
+    """print node"""
+
+    def __init__(self, param_list_node):
+        self.param_list_node = param_list_node
+
+    def __str__(self):
+        # return self.__class__.__name__ + '(' + str(self.left) + ',' + str(self.right) + ')'
+        return str({
+            "name": self.__class__.__name__,
+            "params": self.param_list_node
+        })
+
+    def __repr__(self):
+        # return self.__class__.__name__ + '(' + repr(self.left) + ',' + repr(self.right) + ')'
+        return repr({
+            "name": self.__class__.__name__,
+            "params": self.param_list_node
+        })
+
+    def execute(self):
+        print(">>>", self.param_list_node.execute())
+        return None
+
+
+class ParamList(Node):
+    """参数列表"""
+
+    def __init__(self):
+        self.param_list = []
+
+    def append_param(self, param):
+        self.param_list.append(param)
+
+    def __str__(self):
+        # return self.__class__.__name__ + '(' + str(self.left) + ',' + str(self.right) + ')'
+        return str({
+            "name": self.__class__.__name__,
+            "params": self.param_list
+        })
+
+    def __repr__(self):
+        # return self.__class__.__name__ + '(' + repr(self.left) + ',' + repr(self.right) + ')'
+        return repr({
+            "name": self.__class__.__name__,
+            "params": self.param_list
+        })
+
+    def execute(self):
+        return [param.execute() for param in self.param_list]

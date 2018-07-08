@@ -59,7 +59,38 @@ class Parser(object):
 
     def statement(self):
         """语句"""
+        if self.tok == token.IDENT:
+            if self.lit == token.KW_PRINT:
+                # print语句
+                node = self.print_statement()
+                return node
+
         node = self.expression()
+        return node
+
+    def print_statement(self):
+        """print"""
+        self.next_token()
+        self.skip(token.LPAREN)
+        node = self.param_list()
+        self.skip(token.RPAREN)
+
+        return ast.Print(node)
+
+    def param_list(self):
+        """参数列表"""
+
+        node = ast.ParamList()
+
+        node1 = self.relational_expression()
+        node.append_param(node1)
+
+        while self.tok == token.COMMA:
+            self.skip(token.COMMA)
+
+            node1 = self.relational_expression()
+            node.append_param(node1)
+
         return node
 
     def expression(self):
@@ -197,4 +228,4 @@ class Parser(object):
         if self.tok == tok:
             self.next_token()
         else:
-            self.error("bad express...", tok)  # 非预期
+            self.error("bad skip...", self.tok, tok)  # 非预期

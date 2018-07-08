@@ -29,7 +29,7 @@ class Scanner(object):
         self.ch = ' '
         self.offset = -1
 
-        print(self.src)
+        print("src->", self.src)
         print("=========")
 
         self.next_ch()
@@ -104,11 +104,18 @@ class Scanner(object):
                 tok = token.RPAREN
             elif ch == '=':
                 tok = token.ASSIGN
+            elif ch == ',':
+                tok = token.COMMA
             else:
-                raise Exception("Unknown char", ch)
+                tok = token.ERROR
+                self.error("Unknown lit", lit)
+                exit(1)
 
         return pos, tok, lit
 
+    def error(self, *args):
+        print("error....", args)
+        exit(1)
 
 if __name__ == "__main__":
     pass

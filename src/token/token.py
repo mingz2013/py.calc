@@ -7,7 +7,12 @@ token定义
 __date__ = "14/12/2017"
 __author__ = "zhaojm"
 
+KW_PRINT = "print"
+
+ERROR = "ERROR"
+
 EOF = "EOF"  # -1
+
 
 IDENT = "IDENT"  # main
 NUMBER = "NUMBER"  # 123 1234
@@ -50,6 +55,9 @@ LPAREN = "LPAREN"  # (
 RPAREN = "RPAREN"  # )
 # RBRACK = "RBRACK"  # ]
 # RBRACE = "RBRACE"  # }
+
+
+COMMA = "COMMA"  # ,
 
 
 class Token(object):
