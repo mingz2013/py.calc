@@ -82,7 +82,7 @@ class Number(EndNode):
         return int(self.lit)
 
 
-class Ident(Node):
+class Ident(EndNode):
     """标识符"""
 
     def __init__(self, pos, tok, lit):
