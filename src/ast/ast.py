@@ -7,6 +7,8 @@ ast相关定义
 __date__ = "16/12/2017"
 __author__ = "zhaojm"
 
+from parser import env
+
 
 class Node(object):
     """节点基类"""
@@ -44,8 +46,13 @@ class File(Node):
         self.statements.append(statement)
 
     def execute(self):
+        env.Symtab.enter()  # 进入0级作用域
+
         for statement in self.statements:
             statement.execute()
+
+        env.Symtab.leave()  # 离开0级作用域
+
         return None
 
 
@@ -85,10 +92,10 @@ class Number(EndNode):
 class Ident(EndNode):
     """标识符"""
 
-    def __init__(self, pos, tok, lit):
-        self.pos = pos
-        self.tok = tok
-        self.lit = lit
+    # def __init__(self, pos, tok, lit):
+    #     self.pos = pos
+    #     self.tok = tok
+    #     self.lit = lit
 
     #     self.expression = None
     #
@@ -98,11 +105,13 @@ class Ident(EndNode):
 
     def execute(self):
         # return self.expression.execute()
-        return None
+        # 从环境变量，符号表管理里面，获取当前标识符所对应的值
+        return env.Symtab.getVar(self.lit).initData
 
 
 class BinaryOperator(Node):
     """二元操作符"""
+
     def __init__(self, left, right):
         self.left = left
         self.right = right
@@ -160,6 +169,7 @@ class Assign(BinaryOperator):
     """赋值="""
 
     def execute(self):
+        env.Symtab.addVar(self.left.lit, self.right.execute())
         return None
 
 

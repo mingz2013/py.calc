@@ -5,18 +5,16 @@
 __date__ = "2018/7/8"
 __author__ = "zhaojm"
 
-from token import token
-
 
 class Var(object):
     """变量"""
 
-    def __init__(self, name):
-        self.scopePath = []  # 作用域路径
+    def __init__(self, name, scopePath, initData):
+        self.scopePath = scopePath  # 作用域路径
         self.name = name  # 变量名称
-        self.initData = None  # 初值数据
-        self.inited = False  # 是否初始化
-        self.offset = 0  # 变量的栈帧偏移
+        self.initData = initData  # 初值数据
+        # self.inited = False  # 是否初始化
+        # self.offset = 0  # 变量的栈帧偏移
 
     def scopePathStr(self):
         """作用域路径"""
@@ -25,15 +23,15 @@ class Var(object):
             ret += "/%d" % p
         return ret
 
-    @classmethod
-    def create_with_token(cls, pos, tok, lit):
-        """常量创建变量对象，只需要token里面的数据"""
-        if tok == token.NUMBER:
-            var = Var("<number>")  # 类型作为名字
-            var.initData = int(lit)  # 值
-            return var
-        else:
-            print("var error...")
+        # @classmethod
+        # def create_with_token(cls, pos, tok, lit):
+        #     """常量创建变量对象，只需要token里面的数据"""
+        #     if tok == token.NUMBER:
+        #         var = Var("<number>")  # 类型作为名字
+        #         var.initData = int(lit)  # 值
+        #         return var
+        #     else:
+        #         print("var error...")
 
 
 class SymTab(object):
@@ -48,15 +46,20 @@ class SymTab(object):
 
     def enter(self):
         """作用域管理，进入作用域"""
+        print("enter...")
         self.scopeId += 1
         self.scopePath.append(self.scopeId)
 
     def leave(self):
         """离开作用域"""
+        print("leave...")
         self.scopePath.pop()
 
-    def addVar(self, var):
+    def addVar(self, name, initData):
         """保存变量对象"""
+
+        var = Var(name, self.scopePath[:], initData)
+
         if var.name not in self.varTab:
             # 如果变量名称不在变量列表里，先创建对应的列表
             self.varTab[var.name] = []
@@ -92,6 +95,7 @@ class SymTab(object):
             max_len = 0
             for v in vlist:
                 l = len(v.scopePath)
+                print("getvar...", v.scopePath, self.scopePath)
                 if l <= path_len and v.scopePath[l - 1] == self.scopePath[l - 1]:
                     if l > max_len:
                         max_len = l
