@@ -140,7 +140,7 @@ class Parser(object):
             elif tok1 == token.SUB:
                 node = ast.Sub(node, node2)
             else:
-                self.error("bad express...")
+                Exception("")
 
         print("relational_expression...>", node)
         return node
@@ -161,7 +161,7 @@ class Parser(object):
             elif tok1 == token.MUL:
                 node = ast.Mul(node, node2)
             else:
-                self.error("bad express...")
+                Exception("")
 
         print("multiplicative_expression...>", node)
         return node
