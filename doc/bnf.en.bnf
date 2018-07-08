@@ -11,6 +11,9 @@
 <tk_star> ::= "*"
 <tk_divide> ::= "/"
 <tk_assign> ::= "="
+<tk_lparen> ::= "("
+<tk_rparen> ::= ")"
+
 
 
 // 语法定义
@@ -18,6 +21,7 @@
 
 // 初值表达式
 <primary_expression> ::= <integer>
+                        |<tk_lparen><expression><tk_rparen>
 
 // 一元表达式
 <unary_expression> ::= <primary_expression>
