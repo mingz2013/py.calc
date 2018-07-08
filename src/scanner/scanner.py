@@ -98,6 +98,10 @@ class Scanner(object):
                 tok = token.MUL
             elif ch == '/':
                 tok = token.DIV
+            elif ch == '(':
+                tok = token.LPAREN
+            elif ch == ')':
+                tok = token.RPAREN
             else:
                 raise Exception("Unknown char", ch)
 

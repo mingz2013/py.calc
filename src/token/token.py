@@ -43,11 +43,11 @@ DIV = "DIV"  # /
 # LEQ = "LEQ"  # <=
 # GEQ = "GEQ"  # >=
 #
-# LPAREN = "LPAREN"  # (
+LPAREN = "LPAREN"  # (
 # LBRACK = "LBRACK"  # [
 # LBRACE = "LBRACE"  # {
 #
-# RPAREN = "RPAREN"  # )
+RPAREN = "RPAREN"  # )
 # RBRACK = "RBRACK"  # ]
 # RBRACE = "RBRACE"  # }
 

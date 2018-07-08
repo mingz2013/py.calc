@@ -14,12 +14,6 @@ class Node(object):
     def execute(self):
         """exe"""
 
-    def __str__(self):
-        return self.__class__.__name__ + '(' + str(self.execute()) + ')'
-
-    def __repr__(self):
-        return self.__class__.__name__ + '(' + repr(self.execute()) + ')'
-
 
 class Expression(Node):
     """表达式基类"""
@@ -40,22 +34,41 @@ class Number(Node):
         return self.value
 
     def __str__(self):
-        return self.__class__.__name__ + '(' + str(self.execute()) + ')'
+        # return self.__class__.__name__ + '(' + str(self.execute()) + ')'
+        return str({
+            "name": self.__class__.__name__,
+            "value": self.value
+        })
 
     def __repr__(self):
-        return self.__class__.__name__ + '(' + repr(self.execute()) + ')'
+        # return self.__class__.__name__ + '(' + repr(self.execute()) + ')'
+        return repr({
+            "name": self.__class__.__name__,
+            "value": self.value
+        })
 
 
 class BinaryOperator(Node):
+    """二元操作符"""
     def __init__(self, left, right):
         self.left = left
         self.right = right
 
     def __str__(self):
-        return self.__class__.__name__ + '(' + str(self.left) + ',' + str(self.right) + ')'
+        # return self.__class__.__name__ + '(' + str(self.left) + ',' + str(self.right) + ')'
+        return str({
+            "name": self.__class__.__name__,
+            "left": self.left,
+            "right": self.right
+        })
 
     def __repr__(self):
-        return self.__class__.__name__ + '(' + repr(self.left) + ',' + repr(self.right) + ')'
+        # return self.__class__.__name__ + '(' + repr(self.left) + ',' + repr(self.right) + ')'
+        return repr({
+            "name": self.__class__.__name__,
+            "left": self.left,
+            "right": self.right
+        })
 
 
 class Add(BinaryOperator):

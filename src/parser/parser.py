@@ -39,10 +39,15 @@ class Parser(object):
         #     pass
 
     def parse_file(self):
-        return self.expression()
+        node = self.expression()
 
-    def error(self):
-        print("error....")
+        if self.tok != token.EOF:
+            self.error("bad end...")  # 解析完一个完整的表达式后，没有结束
+
+        return node
+
+    def error(self, *args):
+        print("error....", self.pos, self.tok, self.lit, args)
         exit(1)
 
     def expression(self):
@@ -50,8 +55,6 @@ class Parser(object):
         print("expression....")
         node = self.relational_expression()
 
-        if self.tok != token.EOF:
-            self.error()  # 解析完一个完整的表达式后，没有结束
         print("expression...>", node)
         return node
 
@@ -72,7 +75,7 @@ class Parser(object):
             elif tok1 == token.SUB:
                 node = ast.Sub(node, node2)
             else:
-                self.error()
+                self.error("bad express...")
 
         print("relational_expression...>", node)
         return node
@@ -93,7 +96,7 @@ class Parser(object):
             elif tok1 == token.MUL:
                 node = ast.Mul(node, node2)
             else:
-                self.error()
+                self.error("bad express...")
 
         print("multiplicative_expression...>", node)
         return node
@@ -134,6 +137,17 @@ class Parser(object):
             self.next_token()
             print("primary_expression...>", num)
             return ast.Number(num)
-
+        elif self.tok == token.LPAREN:
+            self.next_token()
+            node = self.expression()
+            self.skip(token.RPAREN)
+            return node
         else:
-            self.error()  # 两个符号连续了
+            self.error("bad express...")  # 两个符号连续了
+
+    def skip(self, tok):
+        """跳过"""
+        if self.tok == tok:
+            self.next_token()
+        else:
+            self.error("bad express...", tok)  # 非预期
