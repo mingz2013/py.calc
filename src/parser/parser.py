@@ -43,12 +43,19 @@ class Parser(object):
         exit(1)
 
     def parse_file(self):
-        node = self.expression()
+
+        file = ast.File()
+
+        while self.tok != token.EOF:
+            node = self.statement()
+            file.append_statements(node)
 
         if self.tok != token.EOF:
             self.error("bad end...")  # 解析完一个完整的表达式后，没有结束
 
-        return node
+        print("File", file)
+
+        return file
 
     def statement(self):
         """语句"""
@@ -67,7 +74,7 @@ class Parser(object):
         """赋值表达式"""
         if self.tok == token.IDENT:
 
-            node = ast.Ident(self.lit)
+            node = ast.Ident(self.pos, self.tok, self.lit)
 
             self.next_token()
 
@@ -84,7 +91,6 @@ class Parser(object):
 
         else:
             self.error("assignment error")
-
 
     def relational_expression(self):
         """加减类表达式"""
@@ -160,15 +166,28 @@ class Parser(object):
         print("primary_expression....", self.tok, self.lit)
         if self.tok == token.NUMBER:
 
-            num = int(self.lit)
+            node = ast.Number(self.pos, self.tok, self.lit)
 
             self.next_token()
-            print("primary_expression...>", num)
-            return ast.Number(num)
+            print("primary_expression...>", node)
+            return node
+        elif self.tok == token.IDENT:
+
+            node = ast.Ident(self.pos, self.tok, self.lit)
+
+            self.next_token()
+
+            print("primary_expression...>", node)
+            return node
+
         elif self.tok == token.LPAREN:
             self.next_token()
+
             node = self.expression()
+
             self.skip(token.RPAREN)
+
+            print("primary_expression...>", node)
             return node
         else:
             self.error("bad express...")  # 两个符号连续了

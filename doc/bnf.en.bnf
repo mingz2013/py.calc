@@ -44,6 +44,7 @@
 
 // 初值表达式
 <primary_expression> ::= <integer>
+                        | <ident>
                         |<tk_lparen><expression><tk_rparen>
 
 // 一元表达式
@@ -73,7 +74,10 @@
 
 // 语句
 
-// 赋值语句
-<statement> ::= {
-        <expression>
-    }
+// 语句
+<statement> ::=     <expression>
+
+
+// 文件
+
+<file> ::= {<statement>}

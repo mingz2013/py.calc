@@ -19,33 +19,66 @@ class Expression(Node):
     """表达式基类"""
 
 
-class Root(Node):
+class File(Node):
     """root"""
 
-
-class Number(Node):
-    """number基类"""
-
-    def __init__(self, num):
-        self.value = num
-
-    def execute(self):
-        """exe"""
-        return self.value
+    def __init__(self):
+        self.statements = []  # 语句集合
 
     def __str__(self):
         # return self.__class__.__name__ + '(' + str(self.execute()) + ')'
         return str({
             "name": self.__class__.__name__,
-            "value": self.value
+            "statements": self.statements
         })
 
     def __repr__(self):
         # return self.__class__.__name__ + '(' + repr(self.execute()) + ')'
         return repr({
             "name": self.__class__.__name__,
-            "value": self.value
+            "statements": self.statements
         })
+
+    def append_statements(self, statement):
+        self.statements.append(statement)
+
+
+class EndNode(Node):
+    def __init__(self, pos, tok, lit):
+        self.pos = pos
+        self.tok = tok
+        self.lit = lit
+
+    def __str__(self):
+        # return self.__class__.__name__ + '(' + str(self.execute()) + ')'
+        return str({
+            "name": self.__class__.__name__,
+            "tok": self.tok,
+            "pos": self.pos,
+            "lit": self.lit
+        })
+
+    def __repr__(self):
+        # return self.__class__.__name__ + '(' + repr(self.execute()) + ')'
+        return repr({
+            "name": self.__class__.__name__,
+            "tok": self.tok,
+            "pos": self.pos,
+            "lit": self.lit
+        })
+
+
+class Number(EndNode):
+    """number基类"""
+
+    def execute(self):
+        """exe"""
+        return int(self.lit)
+
+
+class Ident(EndNode):
+    pass
+
 
 
 class BinaryOperator(Node):
@@ -108,8 +141,3 @@ class Assign(BinaryOperator):
 
     def execute(self):
         return Node
-
-
-class Ident(Node):
-    def __init__(self, lit):
-        self.value = lit
