@@ -16,12 +16,12 @@ class Var(object):
         # self.inited = False  # 是否初始化
         # self.offset = 0  # 变量的栈帧偏移
 
-    def scopePathStr(self):
-        """作用域路径"""
-        ret = ""
-        for p in self.scopePath:
-            ret += "/%d" % p
-        return ret
+        # def scopePathStr(self):
+        #     """作用域路径"""
+        #     ret = ""
+        #     for p in self.scopePath:
+        #         ret += "/%d" % p
+        #     return ret
 
         # @classmethod
         # def create_with_token(cls, pos, tok, lit):
