@@ -74,7 +74,7 @@ class SymTab(object):
             vlist = self.varTab[var.name]
 
             for v in vlist:
-                if v.scopePathStr() == var.scopePathStr():
+                if v.scopePath[-1] == var.scopePath[-1]:
                     # 存在同作用域同名变量，直接替换
                     vlist.remove(v)
                     break
