@@ -57,6 +57,7 @@ class File(Node):
 
 
 class EndNode(Node):
+    """终结符，叶子节点"""
     def __init__(self, pos, tok, lit):
         self.pos = pos
         self.tok = tok
