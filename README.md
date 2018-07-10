@@ -43,9 +43,9 @@ python calc
 
 ```python
 
-a = 1
+a = 1 + 2
 
-b = a + 1
+b = a * 3 / 2 - 1
 
 
 a = 100
