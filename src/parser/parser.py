@@ -214,7 +214,7 @@ class Parser(object):
         elif self.tok == token.LPAREN:
             self.next_token()
 
-            node = self.expression()
+            node = self.relational_expression()
 
             self.skip(token.RPAREN)
 

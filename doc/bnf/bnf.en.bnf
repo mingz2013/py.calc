@@ -56,7 +56,7 @@
 <primary_expression> ::= <integer>
                         | <ident>
                         //                | <函数调用表达式>
-                        |<tk_lparen><expression><tk_rparen>
+                        |<tk_lparen><relational_expression><tk_rparen>
 
 // 一元表达式
 <unary_expression> ::= <primary_expression>
