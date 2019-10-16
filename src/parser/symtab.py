@@ -53,8 +53,10 @@ class SymTab(object):
     def leave(self):
         """离开作用域"""
         print("leave...")
-        self.scopePath.pop()
         # TODO, 回收变量
+
+        self.scopePath.pop()
+
 
     def addVar(self, name, initData):
         """保存变量对象"""
